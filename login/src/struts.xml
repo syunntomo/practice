@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- Struts2での定数を設定するタグ、name属性に入れる値は決まっているので本家参照 -->
+	<!-- struts.devMode True は開発者が開発しやすい設定にするもので、欠陥部分をエラーとして挙げてくれる -->
+	<constant name = "struts.devMode" value = "true" />
+
+	<!-- 管理所のパッケージ名を決める　extends struts-defaultはstruts2の定義内容を継承することが可能、普通はこれらしい -->
+	<package name = "com.internousdev.login.action" extends = "struts-default">
+
+
+	<!-- actionタグでは、指定されたURLに対してどのアクションクラスを実行するかのマッピングを定義する -->
+	<!-- 今回はname属性でLoginActionと指定したため、/LoginAction.actionというURLが指定された時にアクションクラスが呼ばれる -->
+
+	<!-- class属性はname属性で記述したURLが指定されたときに呼び出すJavaクラスを指定する -->
+	<!-- javaクラスの指定はcom.internousdev.login.actionパッケージのLoginActionクラスという意味である -->
+
+	<!-- method は呼び出されたときに最初に行うメソッドを指定 ここではewecute()を指定しているが、省略しても呼び出される -->
+	<!-- これは省略したときにexecute()が呼び出されるようにデフォルト設定されているため -->
+
+	<!-- ０.login.jspから情報が送られたら、LoginAction.javaのexecute()を実行する -->
+	<action name = "LoginAction" class="com.internousdev.login.action.LoginAction" method="execute">
+
+		<!-- name属性･･･処理結果コード(Actionの処理メソッドを行ったときの戻り値を指定) -->
+		<!-- resultタグの間に開きたいjspファイルを指定する -->
+
+
+		<!-- ⑧戻り値として、今回はsuccessが選ばれたので、上のloginSuccess.jspをフロントに返す -->
+		<result name = "success">loginSuccess.jsp</result>
+		<result name = "error">loginError.jsp</result>
+	</action>
+
+	</package>
+
+</struts>
